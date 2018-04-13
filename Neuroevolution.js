@@ -400,6 +400,9 @@ var Neuroevolution = function (options) {
      * @return First Generation.
      */
     Generations.prototype.firstGeneration = function (input, hiddens, output) {
+        console.log(input);
+        console.log(hiddens);
+        console.log(output);
         var out = [];
         for (var i = 0; i < self.options.population; i++) {
             // Generate the Network and save it.
