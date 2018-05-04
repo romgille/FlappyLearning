@@ -1,20 +1,20 @@
-var Bird = function(json){
+var Bird = function(options){
     this.x = 80;
     this.y = 250;
     this.width = 40;
-    this.height = 30;
+    this.gameboardHeight = 30;
 
     this.alive = true;
     this.gravity = 0;
     this.velocity = 0.3;
     this.jump = -6;
 
-    this.init(json);
+    this.init(options);
 }
 
-Bird.prototype.init = function(json){
-    for(var i in json){
-        this[i] = json[i];
+Bird.prototype.init = function(options){
+    for(var i in options){
+        this[i] = options[i];
     }
 }
 
@@ -27,16 +27,16 @@ Bird.prototype.update = function(){
     this.y += this.gravity;
 }
 
-Bird.prototype.isDead = function(height, pipes){
-    if(this.y >= height || this.y + this.height <= 0){
+Bird.prototype.isDead = function(gameboardHeight, pipes){
+    if(this.y >= gameboardHeight || this.y + this.gameboardHeight <= 0){
         return true;
     }
     for(var i in pipes){
         if(!(
             this.x > pipes[i].x + pipes[i].width ||
             this.x + this.width < pipes[i].x ||
-            this.y > pipes[i].y + pipes[i].height ||
-            this.y + this.height < pipes[i].y
+            this.y > pipes[i].y + pipes[i].gameboardHeight ||
+            this.y + this.gameboardHeight < pipes[i].y
         )){
             return true;
         }
