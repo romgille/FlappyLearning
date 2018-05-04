@@ -1,16 +1,16 @@
-var Pipe = function(options){
+var Pipe = function(json){
     this.x = 0;
     this.y = 0;
     this.width = 50;
     this.height = 40;
     this.speed = 3;
 
-    this.init(options);
+    this.init(json);
 }
 
-Pipe.prototype.init = function(options){
-    for(var i in options){
-        this[i] = options[i];
+Pipe.prototype.init = function(json){
+    for(var i in json){
+        this[i] = json[i];
     }
 }
 

@@ -60,14 +60,6 @@ var Neuroevolution = function (options) {
     // Overriding default options with the pass in options
     self.set(options);
 
-    populate = function (layer, nbNeurons, nbInputs) {
-        neurons = [];
-        for (var i = 0; i < nbNeurons; i++) {
-            var n = new Neuron();
-            n.populate(nbInputs);
-            layer.push(n);
-        }
-    }
 
     /*NEURON**********************************************************************/
     /**
@@ -90,6 +82,15 @@ var Neuroevolution = function (options) {
         this.weights = [];
         for (var i = 0; i < nb; i++) {
             this.weights.push(self.options.randomClamped());
+        }
+    }
+
+    populate = function (layer, nbNeurons, nbInputs) {
+        neurons = [];
+        for (var i = 0; i < nbNeurons; i++) {
+            var n = new Neuron();
+            n.populate(nbInputs);
+            layer.push(n);
         }
     }
 
@@ -317,7 +318,8 @@ var Neuroevolution = function (options) {
                 if (Math.random() <= self.options.mutationRate) {
                     data.network.weights[i] += Math.random() *
                         self.options.mutationRange *
-                        2 - self.options.mutationRange;
+                        2 -
+                        self.options.mutationRange;
                 }
             }
             datas.push(data);
@@ -398,6 +400,9 @@ var Neuroevolution = function (options) {
      * @return First Generation.
      */
     Generations.prototype.firstGeneration = function (input, hiddens, output) {
+        console.log(input);
+        console.log(hiddens);
+        console.log(output);
         var out = [];
         for (var i = 0; i < self.options.population; i++) {
             // Generate the Network and save it.
@@ -516,4 +521,3 @@ var Neuroevolution = function (options) {
         self.generations.addGenome(new Genome(score, network.getSave()));
     }
 }
-
