@@ -7,7 +7,7 @@ from PIL import ImageFont
 from PIL import ImageTk
 from PIL import ImageDraw
 
-myfont = ImageFont.truetype(font='arial.ttf', size=30);
+myfont = ImageFont.truetype(font='Roboto-Regular.ttf', size=30);
 
 window = tkinter.Tk()
 WIDTH, HEIGHT = 640, 480
