@@ -11,6 +11,61 @@ from PIL import ImageDraw
 import Bird
 import Pipe
 
+class Display:
+    WIDTH = 500
+    HEIGHT = 512
+    BLACK_COLOR = "#000000"
+    WHITE_COLOR = "#FFFFFF"
+    FONT = ImageFont.truetype(font="fonts/Roboto-Regular.ttf", size=30)
+    XXX = 50
+    YYY = 200
+
+    def __init__(self):
+        # Window
+        self.window = tkinter.Tk()
+        self.window.title("Flappy Learning")
+        # Image
+        self.buffer = Image.new("RGBA", (WIDTH, HEIGHT))
+
+        # Background
+        backgroundImage = Image.open("img/background.png").convert("RGBA")
+        xBg, yBg = myBackgroundImage.size
+        self.background = Image.new("RGBA", (WIDTH, HEIGHT))
+        self.background.paste(backgroundImage, (xBg, 0, xBg*2, yBg), backgroundImage)
+        self.background.paste(backgroundImage, (0, 0, xBg, yBg), backgroundImage)
+
+    def draw(birds, pipes):
+        # Draw the background
+        draw = ImageDraw.Draw(buffer)
+        # Canvas to draw
+        canvas = tkinter.Canvas(self.window, width=WIDTH-1, height=HEIGHT-1, bg=BLACK_COLOR)
+        img = tkinter.PhotoImage(width=WIDTH, height=HEIGHT)
+        ECRAN = canvas.create_image((WIDTH/2, HEIGHT/2), image=img, state="normal")
+        canvas.pack()
+
+        draw.rectangle(((0,0), (WIDTH,HEIGHT)), fill=myBlackColor)
+        buffer.paste(myBackground, (-yyy,0))
+        buffer.paste(myBackground, (-yyy+WIDTH,0))
+
+        # Draw birds
+        for bird in birds:
+            bird.draw(buffer)
+        # Draw pipes
+        for pipe in pipes:
+            pipe.draw(buffer)
+
+        # Draw text delta
+        draw.text((30, 5),"delta: " + str(delta), font=FONT, fill=WHITE_COLOR)
+        yyy = (yyy+4) % WIDTH
+
+        # Transfert de la zone de dessin vers l'ecran
+        photo = PIL.ImageTk.PhotoImage(buffer)
+        canvas.itemconfig(ECRAN, image=photo)
+
+        # Affichage
+        canvas.update()
+
+"""
 # Window
 window = tkinter.Tk()
 
@@ -45,7 +100,6 @@ window.title("Flappy Learning")
 img = tkinter.PhotoImage(width=WIDTH, height=HEIGHT)
 ECRAN = canvas.create_image((WIDTH/2, HEIGHT/2), image=img, state="normal")
 canvas.pack()
-
 xxx = 50
 yyy = 200
 
@@ -66,6 +120,7 @@ while(True):
     photo = PIL.ImageTk.PhotoImage(buffer)
     canvas.itemconfig(ECRAN, image=photo)
 
+    # TODO: faire la synchronization dans game
     # synchronization at 60 fps
     t = time.time()
     delta = t - old_time
@@ -78,3 +133,4 @@ while(True):
     canvas.update()
 
 window.destroy()
+"""
