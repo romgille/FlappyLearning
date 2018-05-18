@@ -11,6 +11,7 @@ class Bird(Drawable.Drawable):
         self.gravity = gravity
         self.velocity = velocity
         self.jump = jump
+        self.updateCallback = lambda: None
         super().__init__(self.x, self.y, "img/bird.png")
 
     def flap(self):
@@ -19,6 +20,7 @@ class Bird(Drawable.Drawable):
     def update(self):
         self.gravity += self.velocity
         self.y += self.gravity
+        self.updateCallback(self)
 
     # why never return false ?
     def isDead(self, height, pipes):
