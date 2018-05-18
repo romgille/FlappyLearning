@@ -1,3 +1,4 @@
+#!/bin/python
 import tkinter
 import os, inspect
 import time
@@ -18,7 +19,7 @@ WIDTH, HEIGHT = 500, 512
 buffer = Image.new("RGBA", (WIDTH,HEIGHT))
 
 # stuff
-myfont = ImageFont.truetype(font="Roboto-Regular.ttf", size=30);
+myfont = ImageFont.truetype(font="fonts/Roboto-Regular.ttf", size=30);
 myBlackColor = "#000000"
 myWhiteColor = "#FFFFFF"
 
