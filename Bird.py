@@ -1,16 +1,16 @@
 import Drawable
 
 class Bird(Drawable.Drawable):
-    def __init__(self, x = None, y = None, width = None, height = None,
-            alive = None, gravity = None, velocity = None, jump = None):
-        self.x = x or 80;
-        self.y = y or 250;
-        self.width = width or 40;
-        self.height = height or 30;
-        self.alive = alive or True;
-        self.gravity = gravity or 0;
-        self.velocity = velocity or 0.3;
-        self.jump = jump or -6;
+    def __init__(self, x = 80, y = 250, width = 40, height = 30, alive = True,
+            gravity = 0, velocity = 0.3, jump = -6):
+        self.x = x
+        self.y = y
+        self.width = width
+        self.height = height
+        self.alive = alive
+        self.gravity = gravity
+        self.velocity = velocity
+        self.jump = jump
         super().__init__(self.x, self.y, "img/bird.png")
 
     def flap(self):

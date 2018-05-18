@@ -1,19 +1,19 @@
 class Neuroevolution:
 
-    def __init__(self, network=None, population=None, elitism=None,
-            randomBehavior=None, mutationRate=None, mutationRange=None,
-            historic=None, lowHistoric=None, scoreSort=None, nbChild=None):
+    def __init__(self, network = [1,[1],1], population = 50, elitism = 0.2,
+            randomBehavior = 0.2, mutationRate = 0.1, mutationRange = 0.5,
+            historic = 0, lowHistoric = False, scoreSort = -1, nbChild = 1):
 
-        self.network = network or [1,[1],1]
-        self.population = population or 50
-        self.elitism = elitism or 0.2
-        self.randomBehaviour = randomBehavior or 0.2
-        self.mutationRate = mutationRate or 0.1
-        self.mutationRange = mutationRange or 0.5
-        self.historic = historic or 0
-        self.lowHistoric = lowHistoric or False
-        self.scoreSort = scoreSort or -1
-        self.nbChild = nbChild or 1
+        self.network = network
+        self.population = population
+        self.elitism = elitism
+        self.randomBehaviour = randomBehavior
+        self.mutationRate = mutationRate
+        self.mutationRange = mutationRange
+        self.historic = historic
+        self.lowHistoric = lowHistoric
+        self.scoreSort = scoreSort
+        self.nbChild = nbChild
         self.neurons = [[]] #first element is value, second is weight
 
     @staticmethod
