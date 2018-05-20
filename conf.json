@@ -15,14 +15,12 @@
         "path": "fonts/Roboto-Regular.ttf",
         "size": 30
     },
-    "rsc": {
-        "images": {
-            "background": "img/background.png",
-            "bird": "img/bird.png",
-            "flappy": "img/flappy.png",
-            "pipetop": "img/pipetop.png",
-            "pipebottom": "img/pipebottom.png"
-        }
+    "img": {
+        "background": "img/background.png",
+        "bird": "img/bird.png",
+        "flappy": "img/flappy.png",
+        "pipetop": "img/pipetop.png",
+        "pipebottom": "img/pipebottom.png"
     },
     "neuroevolution":{
         "stuff": 0

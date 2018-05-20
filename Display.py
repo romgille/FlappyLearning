@@ -9,33 +9,21 @@ from PIL import ImageFont
 from PIL import ImageTk
 from PIL import ImageDraw
 
-# not sure it's needed to import Drawable to use Drawable.update() ?
-import Drawable
-
-# Move that fucking const garbage to a global file/class for configs ?
-WIDTH = 500
-HEIGHT = 512
-WINDOW_TITLE = "Flappy Learning"
-BLACK_COLOR = "#000000"
-WHITE_COLOR = "#FFFFFF"
-FONT = ImageFont.truetype(font="fonts/Roboto-Regular.ttf", size=30)
-XXX = 50
-YYY = 200
-
-
+import config
 
 class Display:
     def __init__(self):
         # Open a Window
         self.window = tkinter.Tk()
-        self.window.title(WINDOW_TITLE)
+        self.window.title(config.cfg["window"]["title"])
 
         # Listening to keypress event
         self.keypress_event = False
         self.window.bind("<KeyPress>", self.keydown)
 
         # Prepare the Image Buffer
-        self.buffer = Image.new("RGBA", (WIDTH, HEIGHT))
+        self.buffer = Image.new("RGBA",
+            (config.cfg["window"]["width"],config.cfg["window"]["height"]))
 
         # Background (need to be moved to a new class)
         # backgroundImage = Image.open("img/background.png").convert("RGBA")
@@ -48,9 +36,15 @@ class Display:
         self.draw = ImageDraw.Draw(self.buffer)
 
         # Prepare the Canvas
-        self.canvas = tkinter.Canvas(self.window, width=WIDTH-1, height=HEIGHT-1, bg=BLACK_COLOR)
-        self.img = tkinter.PhotoImage(width=WIDTH, height=HEIGHT)
-        self.ECRAN = self.canvas.create_image((WIDTH/2, HEIGHT/2), image=self.img, state="normal")
+        self.canvas = tkinter.Canvas(self.window,
+            width=config.cfg["window"]["width"] - 1,
+            height=config.cfg["window"]["height"] - 1,
+            bg=config.cfg["color"]["black"])
+        self.img = tkinter.PhotoImage(width=config.cfg["window"]["width"],
+            height=config.cfg["window"]["height"])
+        self.ECRAN = self.canvas.create_image(
+            (config.cfg["window"]["width"]/2, config.cfg["window"]["height"]/2),
+            image=self.img, state="normal")
         self.canvas.pack()
 
     def close(self):
@@ -58,7 +52,9 @@ class Display:
 
     def drawthat(self, drawables):
         # wipe the current image
-        self.draw.rectangle(((0,0), (WIDTH,HEIGHT)), fill=BLACK_COLOR)
+        self.draw.rectangle(((0,0),
+            (config.cfg["window"]["width"],config.cfg["window"]["height"])),
+            fill=config.cfg["color"]["black"])
 
         # background stuff, need to be moved to a new class
         # buffer.paste(myBackground, (-yyy,0))
