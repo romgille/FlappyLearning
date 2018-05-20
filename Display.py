@@ -30,6 +30,10 @@ class Display:
         self.window = tkinter.Tk()
         self.window.title(WINDOW_TITLE)
 
+        # Listening to keypress event
+        self.keypress_event = False
+        self.window.bind("<KeyPress>", self.keydown)
+
         # Prepare the Image Buffer
         self.buffer = Image.new("RGBA", (WIDTH, HEIGHT))
 
@@ -76,6 +80,9 @@ class Display:
 
         # Affichage
         self.canvas.update()
+
+    def keydown(self, event):
+        self.keypress_event = True
 
 """
 # Window
