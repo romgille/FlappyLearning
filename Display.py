@@ -12,18 +12,19 @@ from PIL import ImageDraw
 # not sure it's needed to import Drawable to use Drawable.update() ?
 import Drawable
 
+# Move that fucking const garbage to a global file/class for configs ?
+WIDTH = 500
+HEIGHT = 512
+WINDOW_TITLE = "Flappy Learning"
+BLACK_COLOR = "#000000"
+WHITE_COLOR = "#FFFFFF"
+FONT = ImageFont.truetype(font="fonts/Roboto-Regular.ttf", size=30)
+XXX = 50
+YYY = 200
+
+
+
 class Display:
-
-    # Move that fucking const garbage to a global file/class for configs ?
-    WIDTH = 500
-    HEIGHT = 512
-    WINDOW_TITLE = "Flappy Learning"
-    BLACK_COLOR = "#000000"
-    WHITE_COLOR = "#FFFFFF"
-    FONT = ImageFont.truetype(font="fonts/Roboto-Regular.ttf", size=30)
-    XXX = 50
-    YYY = 200
-
     def __init__(self):
         # Open a Window
         self.window = tkinter.Tk()
@@ -40,20 +41,20 @@ class Display:
         # self.background.paste(backgroundImage, (0, 0, xBg, yBg), backgroundImage)
 
         # Prepare the Drawing Object
-        draw = ImageDraw.Draw(buffer)
+        self.draw = ImageDraw.Draw(self.buffer)
 
         # Prepare the Canvas
-        canvas = tkinter.Canvas(self.window, width=WIDTH-1, height=HEIGHT-1, bg=BLACK_COLOR)
-        img = tkinter.PhotoImage(width=WIDTH, height=HEIGHT)
-        ECRAN = canvas.create_image((WIDTH/2, HEIGHT/2), image=img, state="normal")
-        canvas.pack()
+        self.canvas = tkinter.Canvas(self.window, width=WIDTH-1, height=HEIGHT-1, bg=BLACK_COLOR)
+        self.img = tkinter.PhotoImage(width=WIDTH, height=HEIGHT)
+        self.ECRAN = self.canvas.create_image((WIDTH/2, HEIGHT/2), image=self.img, state="normal")
+        self.canvas.pack()
 
     def close(self):
-        window.destroy()
+        self.window.destroy()
 
-    def draw(self, drawables):
+    def drawthat(self, drawables):
         # wipe the current image
-        draw.rectangle(((0,0), (WIDTH,HEIGHT)), fill=myBlackColor)
+        self.draw.rectangle(((0,0), (WIDTH,HEIGHT)), fill=BLACK_COLOR)
 
         # background stuff, need to be moved to a new class
         # buffer.paste(myBackground, (-yyy,0))
@@ -61,7 +62,7 @@ class Display:
 
         # Draw
         for d in drawables:
-            d.draw(buffer)
+            d.draw(self.buffer)
 
         # Draw text delta (need clock stuff)
         # draw.text((30, 5),"delta: " + str(delta), font=FONT, fill=WHITE_COLOR)
@@ -70,11 +71,11 @@ class Display:
         # yyy = (yyy+4) % WIDTH
 
         # Transfert de la zone de dessin vers l'ecran
-        photo = PIL.ImageTk.PhotoImage(buffer)
-        canvas.itemconfig(ECRAN, image=photo)
+        photo = PIL.ImageTk.PhotoImage(self.buffer)
+        self.canvas.itemconfig(self.ECRAN, image=photo)
 
         # Affichage
-        canvas.update()
+        self.canvas.update()
 
 """
 # Window
