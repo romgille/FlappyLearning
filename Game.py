@@ -1,105 +1,118 @@
 import random
 
+import Background
+import Bird
+import Pipe
+
 class Game:
     def __init__(self):
+        self.background = Background.Background()
         self.pipes = []
         self.birds = []
         self.score = 0
-        #self.canvas = document.querySelector("#flappy") TODO display
-        #self.ctx = self.canvas.getContext("2d") TODO display
-        #self.width = self.canvas.width TODO display
-        #self.height = self.canvas.height TODO display
+        self.width = 500
+        self.height = 512
         self.spawnInterval = 90
         self.interval = 0
         self.gen = []
         self.alives = 0
         self.generation = 0
-        self.backgroundSpeed = 0.5
-        self.backgroundx = 0
         self.maxScore = 0
 
     def start(self):
-        self.interval = 0
-        self.score = 0
-        self.pipes = []
-        self.birds = []
-        self.gen = Neuvol.nextGeneration()
+        self.birds = [Bird.Bird()]
+        # self.interval = 0
+        # self.score = 0
+        # self.pipes = []
+        # self.birds = []
+        # self.gen = [] # need Nerovol implementaion #Neuvol.nextGeneration()
+        #
+        # for generation in self.gen:
+        #     b = Bird.Bird()
+        #     self.birds.append(b)
+        #
+        # self.generation += 1
+        # self.alives = len(self.birds)
 
-        for generation in self.gen:
-            b = Bird()
-            self.birds.append(b)
-
-        self.generation += 1
-        self.alives = len(self.birds)
-
-    def update(self):
-        self.backgroundx += self.backgroundSpeed
-        nextHoll = 0
+    def update(self, deltaTime):
+        # nothing to do if all birds are dead
         if len(self.birds) == 0:
             return
 
-        for i in range(0, len(self.pipes), 2):
-            pipe = self.pipes[i]
-            if pipe.x + pipe.width > self.birds[0].x:
-                nextHoll = pipe.height/self.height
-                break
+        # move the background
+        self.background.update(deltaTime)
 
-        for i in range(0, len(self.birds)):
-            bird = self.birds[i]
-            network = self.gen[i]
-            if bird.alive:
-                inputs = [bird.y / self.height, nextHoll]
+        # find next holl
+        # nextHoll = 0
+        # for i in range(0, len(self.pipes), 2):
+        #     pipe = self.pipes[i]
+        #     if pipe.x + pipe.width > self.birds[0].x:
+        #         nextHoll = pipe.height/self.height
+        #         break
 
-                output = network.compute(inputs)
-                if len(output) <= 1 and output[0] > 0.5:
-                    bird.flap()
+        # update birds
+        # for i in range(0, len(self.birds)):
+        #     bird = self.birds[i]
+        #     network = self.gen[i]
+        #     if bird.alive:
+        #         inputs = [bird.y / self.height, nextHoll]
+        #
+        #         output = network.compute(inputs)
+        #         if len(output) <= 1 and output[0] > 0.5:
+        #             bird.flap()
+        #
+        #         bird.update()
+        #
+        #         if bird.isDead(self.height, self.pipes):
+        #             bird.alive = False
+        #             self.alives -= 1
+        #
+        #             Neuvol.networkScore(network, self.score)
+        #             if self.isItEnd():
+        #                 self.start()
 
-                bird.update()
+        # update pipes
+        # for pipe in self.pipes:
+        #     pipe.update()
+        #     if pipe.isOut():
+        #         self.pipes.remove(pipe)
 
-                if bird.isDead(self.height, self.pipes):
-                    bird.alive = False
-                    self.alives -= 1
+        # not sure what it does ¯\_(ツ)_/¯
+        # if self.interval == 0:
+        #     deltaBord = 50
+        #     pipeHoll = 120
+        #     hollPosition = round(random.random() * \
+        #             (self.height - deltaBord * 2 - pipeHoll)) + deltaBord
+        #
+        #     self.pipes.append(Pipe(x=self.width, y=0, height=hollPosition))
+        #     self.pipes.append(Pipe(x=self.width, y=hollPosition+pipeHoll, height=self.height))
+        #
+        # self.interval += 1
+        # if self.interval == self.spawnInterval:
+        #     self.interval = 0
 
-                    Neuvol.networkScore(network, self.score)
-                    if self.isItEnd():
-                        self.start()
-
-        for pipe in self.pipes:
-            pipe.update()
-            if pipe.isOut():
-                self.pipes.remove(pipe)
-
-        if self.interval == 0:
-            deltaBord = 50
-            pipeHoll = 120
-            hollPosition = round(random.random() * \
-                    (self.height - deltaBord * 2 - pipeHoll)) + deltaBord
-
-            self.pipes.append(Pipe(x=self.width, y=0, height=hollPosition))
-            self.pipes.append(Pipe(x=self.width, y=hollPosition+pipeHoll, height=self.height))
-
-        self.interval += 1
-        if self.interval == self.spawnInterval:
-            self.interval = 0
-
+        # update score
         self.score += 1
         self.maxScore = self.score if self.score > self.maxScore else self.maxScore
-
-       # if FPS == 0:
-       #     setZeroTimeout(function(){
-       #         self.update()
-       #     })
-       # }else{
-       #     setTimeout(function(){
-       #         self.update()
-       #     }, 1000/FPS)
-       # }
 
     def isItEnd(self):
         for bird in self.birds:
             if bird.alive:
-                return false
-        return true
+                return False
+        return True
+
+    def drawScene(self):
+        drawables = [self.background]
+
+        for b in self.birds:
+            drawables.append(b)
+
+        for p in self.pipes:
+            drawables.append(p)
+
+        return drawables
+
+
 
     #Game.prototype.display = function(){
     #    self.ctx.clearRect(0, 0, self.width, self.height)
@@ -162,4 +175,3 @@ class Game:
     #        self.display()
     #    })
     #}
-

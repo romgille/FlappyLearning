@@ -2,15 +2,12 @@
 
 import time
 
-import Background
-import Bird
+import Game
 import Display
 
 display = Display.Display()
-bg = Background.Background()
-birds = []
-
-birds.append(Bird.Bird())
+game = Game.Game()
+game.start()
 
 # sync stuff
 delta = 0
@@ -18,15 +15,13 @@ old_time = time.time()
 
 while not display.keypress_event:
 
-    # move the background
-    bg.update(delta)
+    if game.isItEnd():
+        game.start()
 
-    # move all elements to a single array of Drawables
-    drawables = [bg]
-    for b in birds:
-        drawables.append(b)
+    game.update(delta)
 
     # draw the scene
+    drawables = game.drawScene()
     display.drawthat(drawables)
 
     # synchronization at 60 fps
