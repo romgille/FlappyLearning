@@ -2,6 +2,7 @@ import random
 
 import Background
 import Bird
+import config
 import Pipe
 
 class Game:
@@ -51,6 +52,8 @@ class Game:
         #         break
 
         # update birds
+        for b in self.birds:
+            b.update(deltaTime)
         # for i in range(0, len(self.birds)):
         #     bird = self.birds[i]
         #     network = self.gen[i]
@@ -97,7 +100,7 @@ class Game:
 
     def isItEnd(self):
         for bird in self.birds:
-            if bird.alive:
+            if not bird.isDead(config.cfg["window"]["height"], self.pipes):
                 return False
         return True
 
