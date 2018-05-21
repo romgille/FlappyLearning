@@ -1,3 +1,4 @@
+import config
 import Drawable
 
 class Bird(Drawable.Drawable):
@@ -11,7 +12,7 @@ class Bird(Drawable.Drawable):
         self.gravity = gravity
         self.velocity = velocity
         self.jump = jump
-        super().__init__(self.x, self.y, "img/bird.png")
+        super().__init__(self.x, self.y, config.cfg["img"]["bird"])
 
     def flap(self):
         self.gravity = self.jump
