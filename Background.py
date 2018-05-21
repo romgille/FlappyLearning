@@ -3,10 +3,6 @@ from PIL import Image
 import config
 import Drawable
 
-# More fucking const
-WIDTH = 500
-HEIGHT = 512
-
 class Background(Drawable.Drawable):
     def __init__(self, x = 0, y = 0, width = 50, height = 40, speed = 3):
         self.x = 0
