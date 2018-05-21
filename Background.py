@@ -14,7 +14,7 @@ class Background(Drawable.Drawable):
         self.y = 0
         self.width = WIDTH
         self.height = HEIGHT
-        self.speed = 4
+        self.speed = 200 # pixels per second
         super().__init__(self.x, self.y, "img/background.png")
 
         # Make background wider than screen size
@@ -26,8 +26,11 @@ class Background(Drawable.Drawable):
         self.background.paste(self.image, (xBg, 0, xBg*2, yBg), self.image)
         self.background.paste(self.image, (0, 0, xBg, yBg), self.image)
 
-    def update(self):
-        self.x = (self.x + self.speed) % self.image_width()
+    def update(self, deltaTime):
+        # move the background
+        self.x += (self.speed * deltaTime)
+        # wrap it to make an infinite scrolling
+        self.x %= self.image_width()
 
     def draw(self, ctx):
-        ctx.paste(self.background, (-self.x, self.y), self.background)
+        ctx.paste(self.background, (int(-self.x), self.y), self.background)
