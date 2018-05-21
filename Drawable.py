@@ -17,4 +17,4 @@ class Drawable(object):
         return self.image_size()[1]
 
     def draw(self, ctx):
-        ctx.paste(self.image, (self.x, self.y), self.image)
+        ctx.paste(self.image, (int(self.x), int(self.y)), self.image)
