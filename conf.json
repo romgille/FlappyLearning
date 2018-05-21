@@ -1,0 +1,28 @@
+{
+    "window": {
+        "title": "Flappy Learning",
+        "height": 512,
+        "width": 500
+    },
+    "color": {
+        "black": "#000000",
+        "white": "#ffffff",
+        "red": "#ff0000",
+        "green": "#00ff00",
+        "blue": "#0000ff"
+    },
+    "default-font": {
+        "path": "fonts/Roboto-Regular.ttf",
+        "size": 30
+    },
+    "img": {
+        "background": "img/background.png",
+        "bird": "img/bird.png",
+        "flappy": "img/flappy.png",
+        "pipetop": "img/pipetop.png",
+        "pipebottom": "img/pipebottom.png"
+    },
+    "neuroevolution":{
+        "stuff": 0
+    }
+}
