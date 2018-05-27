@@ -22,8 +22,17 @@ class Game:
         self.maxScore = 0
 
     def start(self):
-        self.birds = [Bird.Bird()]
-        self.pipes = [Pipe.Pipe()]
+
+        # init birds
+        self.birds = []
+        for i in range(100):
+            self.birds.append(Bird.Bird())
+
+        # init pipes
+        self.pipes = []
+        self.pipe_cooldown = config.cfg['game']['pipe']['spawn-cooldown']
+        self.spawn_pipe()
+
         # self.interval = 0
         # self.score = 0
         # self.pipes = []
@@ -36,6 +45,11 @@ class Game:
         #
         # self.generation += 1
         # self.alives = len(self.birds)
+
+    def spawn_pipe(self):
+        hole_y = random.randint(config.cfg['game']['pipe']['hole-min'],
+            config.cfg['game']['pipe']['hole-max'])
+        self.pipes.append(Pipe.Pipe(hole_y))
 
     def update(self, deltaTime):
         # nothing to do if all birds are dead
@@ -82,44 +96,33 @@ class Game:
             if pipe.isOut():
                 self.pipes.remove(pipe)
 
+        # spawn new pipes
         if self.pipe_cooldown <= 0:
-            hole_y = random.randint(config.cfg['game']['pipe']['hole-min'],
-                config.cfg['game']['pipe']['hole-max'])
-            self.pipes.append(Pipe.Pipe(hole_y))
+            self.spawn_pipe()
             self.pipe_cooldown = config.cfg['game']['pipe']['spawn-cooldown']
         else:
             self.pipe_cooldown -= deltaTime
-        # if self.interval == 0:
-        #     deltaBord = 50
-        #     pipeHoll = 120
-        #     hollPosition = round(random.random() * \
-        #             (self.height - deltaBord * 2 - pipeHoll)) + deltaBord
-        #
-        #     self.pipes.append(Pipe(x=self.width, y=0, height=hollPosition))
-        #     self.pipes.append(Pipe(x=self.width, y=hollPosition+pipeHoll, height=self.height))
-        #
-        # self.interval += 1
-        # if self.interval == self.spawnInterval:
-        #     self.interval = 0
+
+        # check collisions between pipes and birds
+        for bird in self.birds:
+            if b.isDead(config.cfg["window"]["height"], self.pipes):
+                self.birds.remove(bird)
 
         # update score
         self.score += 1
         self.maxScore = self.score if self.score > self.maxScore else self.maxScore
 
     def isItEnd(self):
-        for bird in self.birds:
-            if not bird.isDead(config.cfg["window"]["height"], self.pipes):
-                return False
-        return True
+        return len(self.birds) == 0
 
     def drawScene(self):
         drawables = [self.background]
 
-        for b in self.birds:
-            drawables.append(b)
-
         for p in self.pipes:
             drawables.append(p)
+
+        for b in self.birds:
+            drawables.append(b)
 
         return drawables
 
