@@ -26,7 +26,9 @@ class Game:
         # init birds
         self.birds = []
         for i in range(100):
-            self.birds.append(Bird.Bird())
+            bird = Bird.Bird()
+            bird.brain = lambda b: b.flap() if b.y > random.randint(350, 380) else None
+            self.birds.append(bird)
 
         # init pipes
         self.pipes = []

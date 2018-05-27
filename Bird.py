@@ -13,6 +13,7 @@ class Bird(Drawable.Drawable):
         self.gravity = gravity
         self.velocity = velocity
         self.jump = jump
+        self.brain = lambda: None
         super().__init__(self.x, self.y, config.cfg["img"]["bird"])
 
     def flap(self):
@@ -22,9 +23,8 @@ class Bird(Drawable.Drawable):
         self.gravity += self.velocity * deltaTime
         self.y += self.gravity
 
-        # make bird flap to not die
-        if self.y > 370:
-            self.flap()
+        # use your brain to survive !
+        self.brain(self)
 
     def draw(self, ctx):
         # fix rotation computation
