@@ -11,6 +11,7 @@ class Pipe(Drawable.Drawable):
         self.speed = config.cfg["game"]["pipe"]["speed"]
         self.hole_y = hole_position
         self.hole_height = hole_height
+        self.passed = False
         super().__init__(self.x, self.y, config.cfg["img"]["pipe-top"])
         self.image2 = Image.open(config.cfg["img"]["pipe-bottom"]).convert("RGBA")
 
