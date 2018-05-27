@@ -9,7 +9,7 @@ class Background(Drawable.Drawable):
         self.y = 0
         self.width = config.cfg["window"]["width"]
         self.height = config.cfg["window"]["height"]
-        self.speed = 200 # pixels per second
+        self.speed = config.cfg["game"]["background"]["speed"]
         super().__init__(self.x, self.y, config.cfg["img"]["background"])
 
         # Make background wider than screen size

@@ -23,6 +23,9 @@
         "pipe-bottom": "img/pipebottom.png"
     },
     "game": {
+        "background": {
+            "speed": 75
+        },
         "pipe": {
             "spawn-cooldown": 2,
             "speed": 100,
