@@ -5,7 +5,7 @@ import Drawable
 
 class Bird(Drawable.Drawable):
     def __init__(self, x = 80, y = 250, width = 40, height = 30,
-            gravity = 0, velocity = 7, jump = -6):
+            gravity = 0, velocity = 10, jump = -4.5):
         self.x = x
         self.y = y
         self.width = width
@@ -31,12 +31,15 @@ class Bird(Drawable.Drawable):
 
     # move this to Game ?
     def isDead(self, height, pipes):
+        # out of the screen
         if (self.y >= height) or (self.y <= - self.height):
             return True
 
+        # Collided with pipes
         for pipe in pipes:
-            if (self.x > pipe.x + pipe.width or self.x + self.width < pipe.x or
-                self.y > pipe.y + pipe.height or self.y + self.height < pipe.y):
-                    return True
+            if not (self.x + self.image_width() > pipe.x and self.x < pipe.x + pipe.image_width()):
+                continue
+            if self.y < pipe.hole_y or self.y + self.image_height() > pipe.hole_y + pipe.hole_height:
+                return True
 
         return False
