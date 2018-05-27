@@ -9,6 +9,7 @@ class Game:
     def __init__(self):
         self.background = Background.Background()
         self.pipes = []
+        self.pipe_cooldown = config.cfg['game']['pipe']['spawn-cooldown']
         self.birds = []
         self.score = 0
         self.width = 500
@@ -22,6 +23,7 @@ class Game:
 
     def start(self):
         self.birds = [Bird.Bird()]
+        self.pipes = [Pipe.Pipe()]
         # self.interval = 0
         # self.score = 0
         # self.pipes = []
@@ -75,12 +77,18 @@ class Game:
         #                 self.start()
 
         # update pipes
-        # for pipe in self.pipes:
-        #     pipe.update()
-        #     if pipe.isOut():
-        #         self.pipes.remove(pipe)
+        for pipe in self.pipes:
+            pipe.update(deltaTime)
+            if pipe.isOut():
+                self.pipes.remove(pipe)
 
-        # not sure what it does ¯\_(ツ)_/¯
+        if self.pipe_cooldown <= 0:
+            hole_y = random.randint(config.cfg['game']['pipe']['hole-min'],
+                config.cfg['game']['pipe']['hole-max'])
+            self.pipes.append(Pipe.Pipe(hole_y))
+            self.pipe_cooldown = config.cfg['game']['pipe']['spawn-cooldown']
+        else:
+            self.pipe_cooldown -= deltaTime
         # if self.interval == 0:
         #     deltaBord = 50
         #     pipeHoll = 120
