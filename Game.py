@@ -4,6 +4,7 @@ import Background
 import Bird
 import config
 import Pipe
+import TextDrawer
 
 class Game:
     def __init__(self):
@@ -16,6 +17,7 @@ class Game:
         # scoring
         self.score = 0
         self.score_max = 0
+        self.score_text = TextDrawer.TextDrawer(30, 5)
 
         # Neurovol stuff
         self.gen = []
@@ -126,6 +128,11 @@ class Game:
             if b.isDead(config.cfg["window"]["height"], self.pipes):
                 self.birds.remove(bird)
 
+        # Update text
+        self.score_text.text = "Score: " + str(self.score) \
+            + "\nMax: " + str(self.score_max) \
+            + "\nAlive: " + str(len(self.birds))
+
     def drawScene(self):
         drawables = [self.background]
 
@@ -134,5 +141,7 @@ class Game:
 
         for b in self.birds:
             drawables.append(b)
+
+        drawables.append(self.score_text)
 
         return drawables
