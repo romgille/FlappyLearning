@@ -22,6 +22,10 @@ class Bird(Drawable.Drawable):
         self.gravity += self.velocity * deltaTime
         self.y += self.gravity
 
+        # make bird flap to not die
+        if self.y > 370:
+            self.flap()
+
     def draw(self, ctx):
         # fix rotation computation
         # original : Math.PI/2 * self.gravity/20
