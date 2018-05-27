@@ -19,8 +19,17 @@
         "background": "img/background.png",
         "bird": "img/bird.png",
         "flappy": "img/flappy.png",
-        "pipetop": "img/pipetop.png",
-        "pipebottom": "img/pipebottom.png"
+        "pipe-top": "img/pipetop.png",
+        "pipe-bottom": "img/pipebottom.png"
+    },
+    "game": {
+        "pipe": {
+            "spawn-cooldown": 2,
+            "speed": 100,
+            "hole-min": 200,
+            "hole-max": 300,
+            "hole-height": 120
+        }
     },
     "neuroevolution":{
         "stuff": 0
