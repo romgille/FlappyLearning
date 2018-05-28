@@ -43,7 +43,7 @@ class Bird(Drawable.Drawable):
         for pipe in pipes:
             if not (self.x + self.image_width() > pipe.x and self.x < pipe.x + pipe.image_width()):
                 continue
-            if self.y < pipe.hole_y or self.y + self.image_height() > pipe.hole_y + pipe.hole_height:
+            if self.y < pipe.hole_y or self.y + self.image_height() > pipe.hole_y + pipe.hole_size:
                 return True
 
         return False

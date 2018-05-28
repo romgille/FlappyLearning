@@ -31,7 +31,7 @@
             "speed": 100,
             "hole-min": 260,
             "hole-max": 300,
-            "hole-height": 200
+            "hole-size": 200
         }
     },
     "neuroevolution":{
