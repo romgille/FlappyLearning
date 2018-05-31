@@ -48,7 +48,8 @@ class Game:
         #
         # self.generation += 1
         # self.alives = len(self.birds)
-
+        for bird in self.birds:
+            
     def spawn_pipe(self):
         hole_y = random.randint(config.cfg['game']['pipe']['hole-min'],
             config.cfg['game']['pipe']['hole-max'])
