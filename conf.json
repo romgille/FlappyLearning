@@ -30,7 +30,7 @@
             "spawn-cooldown": 2,
             "speed": 90,
             "hole-min": 100,
-            "hole-max": 385,
+            "hole-max": 300,
             "hole-size": 120
         }
     },

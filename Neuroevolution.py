@@ -7,7 +7,7 @@ class Neuroevolution:
         self.network_structure = network_structure
         self.network = []
         self.mutation_rate = 0.1
-        self.mutation_range = 0.5
+        self.mutation_range = 0.2
 
     def compute(self, inputs):
         for i in range(len(self.network[0])):
@@ -88,11 +88,11 @@ class Neuroevolution:
         self.network.append(output)
 
     def breed(self, oldNetwork):
-        for i in range(len(self.network[1].layer)):
-            for j in range(len(self.network[1][i].neuron)):
-                for k in range(len(self.network[1][i].neuron[i].weights)):
-                    if random.random() > 0.5:
-                        self.network[1][i].neuron[i].weights[j] = oldNetwork[1][i].neuron[j].weights[k]
+        for i in range(len(self.network[1])):
+            for j in range(len(self.network[1][i])):
+                for k in range(len(self.network[1][i][j].weights)):
+                    if random.random() > 0.8:
+                        self.network[1][i][j].weights[k] = oldNetwork[1][i][j].weights[k]
 
     def mutation(self):
         for layer in self.network[1]:
@@ -101,6 +101,6 @@ class Neuroevolution:
                     if random.random() > self.mutation_rate:
                         neuron.weights[i] += random.random() * self.mutation_range * 2 - self.mutation_range
 
-# class BestNetwork:
-#     def __init__(self):
-#         self.
+class BestNetwork:
+    def __init__(self):
+        self.save = None

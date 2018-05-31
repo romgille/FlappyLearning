@@ -17,7 +17,6 @@ class Bird(Drawable.Drawable):
         self.brain = lambda: None
         self.neuron = Neuroevolution.Neuroevolution()
         self.neuron.generateNetwork()
-        self.neuron.mutation()
 
         super().__init__(self.x, self.y, config.cfg["img"]["bird"])
 

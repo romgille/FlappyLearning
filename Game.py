@@ -5,6 +5,7 @@ import Bird
 import config
 import Pipe
 import TextDrawer
+import Neuroevolution
 
 class Game:
     def __init__(self):
@@ -20,15 +21,20 @@ class Game:
         self.score_text = TextDrawer.TextDrawer(30, 5)
 
         # Neurovol stuff
-        self.gen = []
+        self.best = Neuroevolution.BestNetwork()
         self.generation = 0
 
     def start(self):
+        self.generation += 1
+
         # init birds
         self.birds = []
         for i in range(50):
             bird = Bird.Bird()
             self.birds.append(bird)
+            if self.generation > 1:
+                bird.neuron.breed(self.best.save)
+            bird.neuron.mutation()
 
         # init pipes
         self.pipes = []
@@ -129,12 +135,15 @@ class Game:
         # Check collisions between pipes and birds
         for bird in self.birds:
             if bird.isDead(config.cfg["window"]["height"], self.pipes):
+                if len(self.birds) == 1:
+                    self.best.save = bird.neuron.network
                 self.birds.remove(bird)
 
         # Update text
         self.score_text.text = "Score: " + str(self.score) \
             + "\nMax: " + str(self.score_max) \
-            + "\nAlive: " + str(len(self.birds))
+            + "\nAlive: " + str(len(self.birds)) \
+            + "\nGeneration: " + str(self.generation)
 
     def drawScene(self):
         drawables = [self.background]
