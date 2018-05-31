@@ -2,6 +2,7 @@ from math import pi as PI
 
 import config
 import Drawable
+import Neuroevolution
 
 class Bird(Drawable.Drawable):
     def __init__(self, x = 80, y = 250, width = 40, height = 30,
@@ -14,6 +15,10 @@ class Bird(Drawable.Drawable):
         self.velocity = velocity
         self.jump = jump
         self.brain = lambda: None
+        self.neuron = Neuroevolution.Neuroevolution()
+        self.neuron.generateNetwork()
+        self.neuron.mutation()
+
         super().__init__(self.x, self.y, config.cfg["img"]["bird"])
 
     def flap(self):

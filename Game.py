@@ -26,9 +26,8 @@ class Game:
     def start(self):
         # init birds
         self.birds = []
-        for i in range(100):
+        for i in range(50):
             bird = Bird.Bird()
-            bird.brain = lambda b: b.flap() if b.y > random.randint(350, 380) else None
             self.birds.append(bird)
 
         # init pipes
@@ -48,8 +47,8 @@ class Game:
         #
         # self.generation += 1
         # self.alives = len(self.birds)
-        for bird in self.birds:
-            
+        # for bird in self.birds:
+
     def spawn_pipe(self):
         hole_y = random.randint(config.cfg['game']['pipe']['hole-min'],
             config.cfg['game']['pipe']['hole-max'])
@@ -82,7 +81,9 @@ class Game:
 
         # Update birds
         for b in self.birds:
+            b.brain = lambda b: b.flap() if b.neuron.compute([b.y, nextHoll]) > 0.5 else None
             b.update(deltaTime)
+
         # TODO: Neurovol Stuff should be moved to the Bird brain
         # for i in range(0, len(self.birds)):
         #     bird = self.birds[i]
@@ -126,7 +127,7 @@ class Game:
 
         # Check collisions between pipes and birds
         for bird in self.birds:
-            if b.isDead(config.cfg["window"]["height"], self.pipes):
+            if bird.isDead(config.cfg["window"]["height"], self.pipes):
                 self.birds.remove(bird)
 
         # Update text

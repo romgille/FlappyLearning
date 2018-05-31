@@ -28,10 +28,10 @@
         },
         "pipe": {
             "spawn-cooldown": 2,
-            "speed": 100,
-            "hole-min": 260,
-            "hole-max": 300,
-            "hole-size": 200
+            "speed": 400,
+            "hole-min": 100,
+            "hole-max": 385,
+            "hole-size": 120
         }
     },
     "neuroevolution":{
