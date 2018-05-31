@@ -22,7 +22,6 @@ class Bird(Drawable.Drawable):
     def update(self, deltaTime):
         self.gravity += self.velocity * deltaTime
         self.y += self.gravity
-        self.updateCallback(self)
 
         # use your brain to survive !
         self.brain(self)
