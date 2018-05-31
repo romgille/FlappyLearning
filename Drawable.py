@@ -11,10 +11,10 @@ class Drawable(object):
         return self.image.size
 
     def image_width(self):
-        return self.size()[0]
+        return self.image_size()[0]
 
     def image_height(self):
-        return self.size()[1]
+        return self.image_size()[1]
 
     def draw(self, ctx):
-        ctx.paste(self.image, (self.x, self.y), self.image)
+        ctx.paste(self.image, (int(self.x), int(self.y)), self.image)
