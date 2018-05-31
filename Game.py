@@ -81,7 +81,8 @@ class Game:
 
         # Update birds
         for b in self.birds:
-            b.brain = lambda b: b.flap() if b.neuron.compute([b.y, nextHoll]) > 0.5 else None
+            #print(b.neuron.network)
+            b.brain = lambda b: b.flap() if b.neuron.compute([b.y/config.cfg["window"]["height"], nextHoll]) > 0.5 else None
             b.update(deltaTime)
 
         # TODO: Neurovol Stuff should be moved to the Bird brain

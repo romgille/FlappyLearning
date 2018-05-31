@@ -28,7 +28,7 @@
         },
         "pipe": {
             "spawn-cooldown": 2,
-            "speed": 400,
+            "speed": 90,
             "hole-min": 100,
             "hole-max": 385,
             "hole-size": 120

@@ -10,15 +10,21 @@ class Neuroevolution:
         self.mutation_range = 0.5
 
     def compute(self, inputs):
+        for i in range(len(self.network[0])):
+            self.network[0][i].value = inputs[i]
+
         previous = self.network[0]
 
         for layer in self.network[1]:
-            s = 0
             for neuron in layer:
+                s = 0
                 for p in previous:
                     for e in neuron.weights:
                         s += p.value * e
+                print('s=' + str(s))
                 neuron.value = 1 / (1 + s ** 2)
+                print(neuron.value)
+                print('---')
             previous = layer
 
         for neuron in self.network[2]:
