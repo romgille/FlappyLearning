@@ -35,6 +35,6 @@
         }
     },
     "neuroevolution":{
-        "stuff": 0
+        "population": 50
     }
 }

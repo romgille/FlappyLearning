@@ -23,13 +23,14 @@ class Game:
         # Neurovol stuff
         self.best = Neuroevolution.BestNetwork()
         self.generation = 0
+        self.population = config.cfg['game']['neuroevolution']['population']
 
     def start(self):
         self.generation += 1
 
         # init birds
         self.birds = []
-        for i in range(50):
+        for i in range(self.population):
             bird = Bird.Bird()
             self.birds.append(bird)
             if self.generation > 1:
