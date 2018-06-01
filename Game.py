@@ -45,17 +45,6 @@ class Game:
         # init scoring
         self.score = 0
 
-        # TODO: init Neurovol
-        # self.gen = [] # need Nerovol implementaion #Neuvol.nextGeneration()
-        #
-        # for generation in self.gen:
-        #     b = Bird.Bird()
-        #     self.birds.append(b)
-        #
-        # self.generation += 1
-        # self.alives = len(self.birds)
-        # for bird in self.birds:
-
     def spawn_pipe(self):
         hole_y = random.randint(config.cfg['game']['pipe']['hole-min'],
             config.cfg['game']['pipe']['hole-max'])
@@ -88,30 +77,8 @@ class Game:
 
         # Update birds
         for b in self.birds:
-            #print(b.neuron.network)
-            b.brain = lambda b: b.flap() if b.neuron.compute([-b.y/config.cfg["window"]["height"], nextHoll]) > 0.5 else None
+            b.brain = lambda b: b.flap() if b.neuron.compute([-b.y/config.cfg["window"]["height"], nextHoll])[0] > 0.5 else None
             b.update(deltaTime)
-
-        # TODO: Neurovol Stuff should be moved to the Bird brain
-        # for i in range(0, len(self.birds)):
-        #     bird = self.birds[i]
-        #     network = self.gen[i]
-        #     if bird.alive:
-        #         inputs = [bird.y / self.height, nextHoll]
-        #
-        #         output = network.compute(inputs)
-        #         if len(output) <= 1 and output[0] > 0.5:
-        #             bird.flap()
-        #
-        #         bird.update()
-        #
-        #         if bird.isDead(self.height, self.pipes):
-        #             bird.alive = False
-        #             self.alives -= 1
-        #
-        #             Neuvol.networkScore(network, self.score)
-        #             if self.isItEnd():
-        #                 self.start()
 
         # Update pipes
         for pipe in self.pipes:

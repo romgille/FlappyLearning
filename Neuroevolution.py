@@ -33,12 +33,12 @@ class Neuroevolution:
                     s += p.value * e
             neuron.value = 1 / (1 + s ** 2)
 
-        # no need to use output array
-        # output = []
-        # for neuron in self.network[2]:
-        #     output.append(neuron.value)
-        #
-        # return output[0]
+        # Return only computed values
+        output = []
+        for neuron in self.network[2]:
+            output.append(neuron.value)
+
+        return output
 
         return self.network[2][0].value
 
