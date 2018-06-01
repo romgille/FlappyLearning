@@ -21,10 +21,7 @@ class Neuroevolution:
                 for p in previous:
                     for e in neuron.weights:
                         s += p.value * e
-                print('s=' + str(s))
                 neuron.value = 1 / (1 + s ** 2)
-                print(neuron.value)
-                print('---')
             previous = layer
 
         for neuron in self.network[2]:
