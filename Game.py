@@ -23,7 +23,7 @@ class Game:
         # Neurovol stuff
         self.best = Neuroevolution.BestNetwork()
         self.generation = 0
-        self.population = config.cfg['game']['neuroevolution']['population']
+        self.population = config.cfg['neuroevolution']['population']
 
     def start(self):
         self.generation += 1
